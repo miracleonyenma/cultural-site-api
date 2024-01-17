@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "peoples",
+  "info": {
+    "singularName": "people",
+    "pluralName": "peoples",
+    "displayName": "People"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "text"
+    },
+    "Cover": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "practices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::practice.practice",
+      "mappedBy": "people"
+    },
+    "artifacts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::artifact.artifact",
+      "mappedBy": "people"
+    }
+  }
+}
