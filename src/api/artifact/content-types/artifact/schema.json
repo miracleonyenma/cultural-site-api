@@ -4,7 +4,8 @@
   "info": {
     "singularName": "artifact",
     "pluralName": "artifacts",
-    "displayName": "Artifact"
+    "displayName": "Artifact",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,24 +19,26 @@
       "type": "text"
     },
     "media": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "body": {
       "type": "blocks"
@@ -51,6 +54,12 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::people.people",
+      "inversedBy": "artifacts"
+    },
+    "contributor": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
       "inversedBy": "artifacts"
     }
   }

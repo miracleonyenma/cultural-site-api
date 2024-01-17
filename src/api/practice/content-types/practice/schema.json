@@ -4,7 +4,8 @@
   "info": {
     "singularName": "practice",
     "pluralName": "practices",
-    "displayName": "Practice"
+    "displayName": "Practice",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -24,24 +25,26 @@
       "type": "richtext"
     },
     "media": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "people": {
       "type": "relation",
@@ -52,6 +55,12 @@
     "slug": {
       "type": "uid",
       "targetField": "name"
+    },
+    "contributor": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "practices"
     }
   }
 }
