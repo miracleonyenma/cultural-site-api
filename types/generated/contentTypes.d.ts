@@ -362,143 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiArtifactArtifact extends Schema.CollectionType {
-  collectionName: 'artifacts';
-  info: {
-    singularName: 'artifact';
-    pluralName: 'artifacts';
-    displayName: 'Artifact';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    description: Attribute.Text;
-    media: Attribute.Media;
-    cover: Attribute.Media;
-    body: Attribute.Blocks;
-    content: Attribute.RichText;
-    slug: Attribute.UID<'api::artifact.artifact', 'name'>;
-    people: Attribute.Relation<
-      'api::artifact.artifact',
-      'manyToOne',
-      'api::people.people'
-    >;
-    contributor: Attribute.Relation<
-      'api::artifact.artifact',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::artifact.artifact',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::artifact.artifact',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPeoplePeople extends Schema.CollectionType {
-  collectionName: 'peoples';
-  info: {
-    singularName: 'people';
-    pluralName: 'peoples';
-    displayName: 'People';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    description: Attribute.Text;
-    cover: Attribute.Media;
-    practices: Attribute.Relation<
-      'api::people.people',
-      'oneToMany',
-      'api::practice.practice'
-    >;
-    artifacts: Attribute.Relation<
-      'api::people.people',
-      'oneToMany',
-      'api::artifact.artifact'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::people.people',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::people.people',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiPracticePractice extends Schema.CollectionType {
-  collectionName: 'practices';
-  info: {
-    singularName: 'practice';
-    pluralName: 'practices';
-    displayName: 'Practice';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    description: Attribute.Text;
-    body: Attribute.Blocks;
-    content: Attribute.RichText;
-    media: Attribute.Media;
-    cover: Attribute.Media;
-    people: Attribute.Relation<
-      'api::practice.practice',
-      'manyToOne',
-      'api::people.people'
-    >;
-    slug: Attribute.UID<'api::practice.practice', 'name'>;
-    contributor: Attribute.Relation<
-      'api::practice.practice',
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::practice.practice',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::practice.practice',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -915,6 +778,195 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiArtifactArtifact extends Schema.CollectionType {
+  collectionName: 'artifacts';
+  info: {
+    singularName: 'artifact';
+    pluralName: 'artifacts';
+    displayName: 'Artifact';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.Text;
+    media: Attribute.Media;
+    cover: Attribute.Media;
+    body: Attribute.Blocks;
+    content: Attribute.RichText;
+    slug: Attribute.UID<'api::artifact.artifact', 'name'>;
+    people: Attribute.Relation<
+      'api::artifact.artifact',
+      'manyToOne',
+      'api::people.people'
+    >;
+    contributor: Attribute.Relation<
+      'api::artifact.artifact',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    category: Attribute.Relation<
+      'api::artifact.artifact',
+      'manyToOne',
+      'api::category.category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::artifact.artifact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::artifact.artifact',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.Text;
+    artifacts: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::artifact.artifact'
+    >;
+    practices: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::practice.practice'
+    >;
+    slug: Attribute.UID<'api::category.category', 'name'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPeoplePeople extends Schema.CollectionType {
+  collectionName: 'peoples';
+  info: {
+    singularName: 'people';
+    pluralName: 'peoples';
+    displayName: 'People';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.Text;
+    cover: Attribute.Media;
+    practices: Attribute.Relation<
+      'api::people.people',
+      'oneToMany',
+      'api::practice.practice'
+    >;
+    artifacts: Attribute.Relation<
+      'api::people.people',
+      'oneToMany',
+      'api::artifact.artifact'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::people.people',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::people.people',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPracticePractice extends Schema.CollectionType {
+  collectionName: 'practices';
+  info: {
+    singularName: 'practice';
+    pluralName: 'practices';
+    displayName: 'Practice';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.Text;
+    body: Attribute.Blocks;
+    content: Attribute.RichText;
+    media: Attribute.Media;
+    cover: Attribute.Media;
+    people: Attribute.Relation<
+      'api::practice.practice',
+      'manyToOne',
+      'api::people.people'
+    >;
+    slug: Attribute.UID<'api::practice.practice', 'name'>;
+    contributor: Attribute.Relation<
+      'api::practice.practice',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    category: Attribute.Relation<
+      'api::practice.practice',
+      'manyToOne',
+      'api::category.category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::practice.practice',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::practice.practice',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -925,9 +977,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::artifact.artifact': ApiArtifactArtifact;
-      'api::people.people': ApiPeoplePeople;
-      'api::practice.practice': ApiPracticePractice;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -936,6 +985,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::artifact.artifact': ApiArtifactArtifact;
+      'api::category.category': ApiCategoryCategory;
+      'api::people.people': ApiPeoplePeople;
+      'api::practice.practice': ApiPracticePractice;
     }
   }
 }
