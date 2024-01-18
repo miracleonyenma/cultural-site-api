@@ -40,6 +40,10 @@
       "relation": "oneToMany",
       "target": "api::artifact.artifact",
       "mappedBy": "people"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
     }
   }
 }
